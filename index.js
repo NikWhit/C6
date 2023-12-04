@@ -1,4 +1,5 @@
 var apiKey = '4176b9426a5c1a4c8aee6d15f20d71b4';
+var repoList = document.getElementById("repoList")
 //like the weather app on an iphone, checking to see if there are regular places to check weather
 if(localStorage.getItem('searchHistory') === null) {
     var searchHistory = [];
@@ -6,44 +7,75 @@ if(localStorage.getItem('searchHistory') === null) {
     var searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
   }
 //local weather
-getLocation();
+// getLocation();
 setSearchHistory(searchHistory)
 
-document.querySelector('#input').addEventListener('submit', function(event) {
+document.querySelector('#searchBox').addEventListener('submit', function(event) {
     event.preventDefault();
-    if (document.querySelector('#city').value !== '') {
-    }
-//local storage
-localStorage.setItem('searchHistory', JSON.stringify(searchHistory)),
-    setSearchHistory(searchHistory);
-},
-    document.querySelector('#input-btn').parentNode.insertBefore(errorMsg, document.querySelector('#input-btn').nextSibling)
-);
 
-function getGeocoding(city) {
-    var requestUrl = encodeURI('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid='+apiKey);
-};
+    if (document.querySelector('#city').value !== '') {
+      getGeocoding(document.querySelector('#city').value); 
+      searchHistory.splice(0,0,document.querySelector('#city').value);
+    
+      if(searchHistory.length > 4) {
+        searchHistory.pop();
+      }
+//local storage
+      localStorage.setItem('searchHistory', JSON.stringify(searchHistory)),
+      setSearchHistory(searchHistory);
+    }else {
+    var errorMsg = document.createElement('p');
+    errorMsg.textContent = "Please Enter a City.";
+    errorMsg.setAttribute('id', 'error-msg');
+    document.querySelector('#search-btn').parentNode.insertBefore(errorMsg, document.querySelector('#search-btn').nextSibling)
+}
+});
+
+function getLatLog(lat, lon) {
+  var searchedCity = document.getElementById("search-input").value;
+  console.log(searchedCity)
+    var requestUrl = encodeURI('http://api.openweathermap.org/geo/1.0/direct?q='+city+'&limit=1&appid=4176b9426a5c1a4c8aee6d15f20d71b4');
 fetch(requestUrl)
 .then(function (response) {               
     return response.json();
 })
 .then(function (data) {        
-    removeErrorMsg();
+    var requestUrl = 'http://api.openweathermap.org/geo/21.0/direct?lat='+lat+'&lon='+lon+'&appid=4176b9426a5c1a4c8aee6d15f20d71b4'
   //Warn if a bad location or get the weather data
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var requestUrl = 'http://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid=4176b9426a5c1a4c8aee6d15f20d71b4';
+      fetch(requestUrl)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          for (var i = 0; i< data.length; i++) {
+            var listItem = document.createElement('li');
+            listItem.textContent = data[i].dt;
+            repoList.appendChild(listItem)
+          }
+        });
+    });
+
     if(data.length !== 0) {
     getWeather(data[0].lat, data[0].lon);
     } else {
     var errorMsg = document.createElement('p');
-    errorMsg.textContent = "Cant find location, please try again";
+    errorMsg.textContent = "Where is that? Please Try again";
     }
     errorMsg.setAttribute('id', 'error-msg');
             document.querySelector('#search-btn').parentNode.insertBefore(errorMsg, document.querySelector('#search-btn').nextSibling);
-        });
-function getWeather(lat, lon) {
-    var requestUrlForecast = encodeURI('http://api.openweathermap.org/data/2.5/forecast?id=524901&appid='
-    +apiKey);
+        })};
+      
+
+function getWeather() {
+    var requestUrlForecast = encodeURI('http://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid=4176b9426a5c1a4c8aee6d15f20d71b4');
             //Current weather URL
-    var requestUrlCurr = encodeURI('https://api.openweathermap.org/data/2.5/weather?units=imperial&lat='+lat+'&lon='+lon+'&appid='+apiKey);
+    var requestUrlCurr = encodeURI('http://api.openweathermap.org/data/2.5/weather?units=imperial&lat='+lat+'&lon='+lon+'&appid=4176b9426a5c1a4c8aee6d15f20d71b4');
             
     var forecastDay = 1;
 //regular updated weather
@@ -66,12 +98,11 @@ function getWeather(lat, lon) {
     document.querySelector('#current-wind').textContent = data.wind.speed;
     document.querySelector('#current-humidity').textContent = data.main.humidity;
     });
-} fetch(requestUrlForecast)
-.then(function (response) {
-    return response.json();
-})
-.then(function (data) {
- 
+    } fetch(requestUrlForecast)
+      .then(function (response) {
+        return response.json();
+        })
+        .then(function (data) {
     data.list.forEach(function(value, key) {
     if (nextDate.format('YYYY-MM-DD HH:mm:ss') === dayjs.unix(value.dt).format('YYYY-MM-DD HH:mm:ss') || (forecastDay === 5 && key === 39 ) ) {
         if(document.querySelector('#day-'+forecastDay+'-weather-icon') !== null) {
