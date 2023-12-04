@@ -1,6 +1,6 @@
 body {
     margin: 10px !important;
-    background-color: #aeaeae;
+    background-color: rgb(62, 194, 243);
 }
 header {
     background-image: linear-gradient(to right, #4694b8 , #2e2059);
@@ -27,15 +27,15 @@ button {
 }
 
 .forecast {
-    background-color: #323d4f;
+    background-image: linear-gradient(to right, #4694b8 , #2e2059);
     color:white;
 }
 
 .btn-secondary {
     color:black;
-    background-color: #aeaeae;
+    background-image: linear-gradient(to right, #fff42c , rgb(249, 122, 4));
 }
 
 #error-msg {
-    color:red;
+    color:rgb(0, 255, 162);
 }
