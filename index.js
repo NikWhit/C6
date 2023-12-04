@@ -2,10 +2,9 @@ var apiKey = '7259367421b1f650c451844ab4fdf4fc';
 //like the weather app on an iphone, checking to see if there are regular places to check weather
 if(localStorage.getItem('searchHistory') === null) {
     var searchHistory = [];
-} else {
+  } else {
     var searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
-}
-
+  }
 //local weather
 getLocation();
 setSearchHistory(searchHistory)
@@ -16,17 +15,14 @@ document.querySelector('#input').addEventListener('submit', function(event) {
     }
 //local storage
 localStorage.setItem('searchHistory', JSON.stringify(searchHistory)),
-    setSearchHistory(searchHistory),
-} else {
-    var errorMsg = document.createElement('p'),
-    errorMsg.textContent = "Where are you checking for the weather?",
-    errorMsg.setAttribute('id', 'errorMsg'),
-
+    setSearchHistory(searchHistory);
+},
     document.querySelector('#input-btn').parentNode.insertBefore(errorMsg, document.querySelector('#input-btn').nextSibling)
-};
+);
+
 function getGeocoding(city) {
-    var requestUrl = encodeURI('https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid='+apiKey);
-}
+    var requestUrl = encodeURI('https://api.openweathermap.org/data/2.5/weather?units=imperial&lat='+lat+'&lon='+lon+'&appid='+apiKey);
+};
 fetch(requestUrl)
 .then(function (response) {               
     return response.json();
@@ -44,11 +40,11 @@ fetch(requestUrl)
             document.querySelector('#search-btn').parentNode.insertBefore(errorMsg, document.querySelector('#search-btn').nextSibling);
         });
 function getWeather(lat, lon) {
-    var requestUrlForcast = encodeURI('https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat='+lat+'&lon='+lon+'&appid='+apiKey);
+    var requestUrlForecast = encodeURI('https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat='+lat+'&lon='+lon+'&appid='+apiKey);
             //Current weather URL
     var requestUrlCurr = encodeURI('https://api.openweathermap.org/data/2.5/weather?units=imperial&lat='+lat+'&lon='+lon+'&appid='+apiKey);
             
-    var forcastDay = 1;
+    var forecastDay = 1;
 //regular updated weather
     var nextDate = dayjs().hour(12).minute(0).second(0).add(1, 'day');
         fetch(requestUrlCurr)
@@ -69,32 +65,32 @@ function getWeather(lat, lon) {
     document.querySelector('#current-wind').textContent = data.wind.speed;
     document.querySelector('#current-humidity').textContent = data.main.humidity;
     });
-} fetch(requestUrlForcast)
+} fetch(requestUrlForecast)
 .then(function (response) {
     return response.json();
 })
 .then(function (data) {
-  //The forcast data comes in in three hour increments.  For each item received, check for the noon forcast and write that data.
-  //If the noon forcast is not returned by the API for the final day, use the last time that was provided.
+  //The forecast data comes in in three hour increments.  For each item received, check for the noon forecast and write that data.
+  //If the noon forecast is not returned by the API for the final day, use the last time that was provided.
     data.list.forEach(function(value, key) {
-    if (nextDate.format('YYYY-MM-DD HH:mm:ss') === dayjs.unix(value.dt).format('YYYY-MM-DD HH:mm:ss') || (forcastDay === 5 && key === 39 ) ) {
-        if(document.querySelector('#day-'+forcastDay+'-weather-icon') !== null) {
-        document.querySelector('#day-'+forcastDay+'-weather-icon').remove();
+    if (nextDate.format('YYYY-MM-DD HH:mm:ss') === dayjs.unix(value.dt).format('YYYY-MM-DD HH:mm:ss') || (forecastDay === 5 && key === 39 ) ) {
+        if(document.querySelector('#day-'+forecastDay+'-weather-icon') !== null) {
+        document.querySelector('#day-'+forecastDay+'-weather-icon').remove();
         }
       //Create a new element for the weather icon and append it
         var weatherIcon = document.createElement('img');
         weatherIcon.setAttribute('src', "https://openweathermap.org/img/w/" + value.weather[0].icon + ".png");        
-        weatherIcon.setAttribute('id', "day-"+forcastDay+"-weather-icon");            
-        document.querySelector('#day-'+forcastDay+'-date').after(weatherIcon);
-      //Update the forcast data with the information received from the API
-        document.querySelector('#day-'+forcastDay+'-date').textContent = nextDate.format('M/D/YYYY');
-        document.querySelector('#day-'+forcastDay+'-temp').textContent = value.main.temp_max;
-        document.querySelector('#day-'+forcastDay+'-wind').textContent = value.wind.speed;
-        document.querySelector('#day-'+forcastDay+'-humidity').textContent = value.main.humidity;
+        weatherIcon.setAttribute('id', "day-"+forecastDay+"-weather-icon");            
+        document.querySelector('#day-'+forecastDay+'-date').after(weatherIcon);
+      //Update the forecast data with the information received from the API
+        document.querySelector('#day-'+forecastDay+'-date').textContent = nextDate.format('M/D/YYYY');
+        document.querySelector('#day-'+forecastDay+'-temp').textContent = value.main.temp_max;
+        document.querySelector('#day-'+forecastDay+'-wind').textContent = value.wind.speed;
+        document.querySelector('#day-'+forecastDay+'-humidity').textContent = value.main.humidity;
       //increment to the next day.
         nextDate = nextDate.add(1,'day');
-      //increment the forcast day for the ID.
-        forcastDay++;
+      //increment the forecast day for the ID.
+        forecastDay++;
     }
     });
 });
