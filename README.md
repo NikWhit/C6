@@ -10,3 +10,4 @@ https://stackoverflow.com/questions/7067005/disable-button-whenever-a-text-field
 
 https://www.jsdelivr.com/package/npm/dayjs
 
+https://medium.com/@yosami14/creating-a-weather-dashboard-using-html-css-and-javascript-217f80229fb
