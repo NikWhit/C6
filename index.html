@@ -1,80 +1,68 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js"></script>
-    <link rel="stylesheet" href="./Css/style.css" />
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+/>
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
-  
-  <body data-new-gr-c-s-check-loaded="14.1143.0" data-gr-ext-installed> 
-    <header class="text-center">
-        <h1>Weather Dashboard</h1>
-    </header>
-    <main>
-        <div class="row">
-            <div id="citySearch" class="col-lg-3 col-md-6 col-12 mx-auto">
-                <form id="Search"><h2>Search for a City:</h2>
-                    <input type="text"  name="city" id="search-input" placeholder="Enter a city" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" id="search-btn button-addon2" type="button submit">Search</button>
-                </form>
-            <hr>
-                <div id="priorSearch">                    
-                </div>
-            </div>
-            <div class="col-lg-9 col-md-6 col-12"><span id="result-text">Results</span>
-                <div class="row" id="result-content" class="repoList">
-                    <li>
-                    <div class="col-12 border border-1 border-dark">
-                        <h2 id="selected-city" class="d-inline">City</h2>
-                        <p>Temp: <span id="current-temp"></span>&#176;F</p>
-                        <p>Wind: <span id="current-wind"></span> MPH</p>
-                        <p>Humidity: <span id="current-humidity"></span>%</p>
-                    </div></li>
-                </div>
-                <div class="row">
-                    <h3>5-Day Forecast</h3>
-                </div><li>
-                <div class="row">
-                    <div id="day-1" class="forcast col-lg-2 col-md-6 col-12 m-3">
-                        <h4 id="day-1-date"></h4>
-                        <p>Temp: <span id="day-1-temp"></span>&#176;F</p>
-                        <p>Wind: <span id="day-1-wind"></span> MPH</p>
-                        <p>Humidity: <span id="day-1-humidity"></span>%</p>
-                    </div></li>
-                <li><div id="day-2" class="forcast col-lg-2 col-md-6 col-12 m-3">
-                        <h4 id="day-2-date"></h4>
-                        <p>Temp: <span id="day-2-temp"></span>&#176;F</p>
-                        <p>Wind: <span id="day-2-wind"></span> MPH</p>
-                        <p>Humidity: <span id="day-2-humidity"></span>%</p>
-                    </div></li>
-                    <li><div id="day-3" class="forcast col-lg-2 col-md-6 col-12 m-3">
-                        <h4 id="day-3-date"></h4>
-                        <p>Temp: <span id="day-3-temp"></span>&#176;F</p>
-                        <p>Wind: <span id="day-3-wind"></span> MPH</p>
-                        <p>Humidity: <span id="day-3-humidity"></span>%</p>
-                    </div></li>
-                <li><div id="day-4" class="forcast col-lg-2 col-md-6 col-12 m-3">
-                        <h4 id="day-4-date"></h4>
-                        <p>Temp: <span id="day-4-temp"></span>&#176;F</p>
-                        <p>Wind: <span id="day-4-wind"></span> MPH</p>
-                        <p>Humidity: <span id="day-4-humidity"></span>%</p>
-                    </div></li>
-                <li><div id="day-5" class="forcast col-lg-2 col-md-6 col-12 m-3">
-                        <h4 id="day-5-date"></h4>
-                        <p>Temp: <span id="day-5-temp"></span>&#176;F</p>
-                        <p>Wind: <span id="day-5-wind"></span> MPH</p>
-                        <p>Humidity: <span id="day-5-humidity"></span>%</p>
-                    </div></li>
-                </div>
-            </div>
-        </div>
-    </main>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <h1 class="navbar-brand">The Weather</h1>
+      </div>
+    </nav>
+    <div class="input-group mb-3 padding-search">
+      <input
+        type="text"
+        class="form-control"
+        id="search-input"
+        placeholder="Location"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      <button class="btn btn-primary" type="button" id="button-addon2">
+        Search
+      </button>
+    </div>
+      <div class="col-12 col-md-9 p-3 text-light">
+      <h2>Showing results for <span id="result-text"></span></h2>
+      <div id="result-content"></div>
+    </div>
+    <div class="weather-container">
+      <h1 id="cityName"></h1>
+      <p id="temp"></p>
+      <p id="wind"></p>
+      <p id="humidity"></p>
+    </div>
+    
+</div>
+    <script src="./js/index.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
 
-    <script src="./index.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
 </body>
+</html>
+  </body>
 </html>

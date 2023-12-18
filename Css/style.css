@@ -36,6 +36,14 @@ button {
     background-image: linear-gradient(to right, #fff42c , rgb(249, 122, 4));
 }
 
-#error-msg {
-    color:rgb(0, 255, 162);
+button:not(:disabled),
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled) {
+  cursor: pointer;
+}
+
+
+[list]:not([type=date]):not([type=datetime-local]):not([type=month]):not([type=week]):not([type=time])::-webkit-calendar-picker-indicator {
+    display: none !important;
 }
