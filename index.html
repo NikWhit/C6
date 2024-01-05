@@ -1,68 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-    crossorigin="anonymous"
-/>
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-      <div class="container-fluid">
-        <h1 class="navbar-brand">The Weather</h1>
-      </div>
-    </nav>
-    <div class="input-group mb-3 padding-search">
-      <input
-        type="text"
-        class="form-control"
-        id="search-input"
-        placeholder="Location"
-        aria-label="Recipient's username"
-        aria-describedby="button-addon2"
-      />
-      <button class="btn btn-primary" type="button" id="button-addon2">
-        Search
-      </button>
-    </div>
-      <div class="col-12 col-md-9 p-3 text-light">
-      <h2>Showing results for <span id="result-text"></span></h2>
-      <div id="result-content"></div>
-    </div>
-    <div class="weather-container">
-      <h1 id="cityName"></h1>
-      <p id="temp"></p>
-      <p id="wind"></p>
-      <p id="humidity"></p>
-    </div>
-
-</div>
-    <script src="./js/index.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
+    <header class="text-center">
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main>
+        <div class="row">
+            <div id="citySearch" class="col-lg-3 col-md-6 col-12 mx-auto">
+                <form id="searchBox"><h2>Search for a City:</h2>
+                    <input type="text" name="city" id="city" placeholder="Enter a city">
+                    <button class="btn btn-primary my-3" id="search-btn" type="submit">Search</button>
+                </form>
+            <hr>
+                <div id="priorSearch">                    
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-6 col-12">
+                <div class="row">
+                    <div class="col-12 border border-1 border-dark">
+                        <h2 id="selected-city" class="d-inline">City</h2>
+                        <p>Temp (F): <span id="current-temp"></span></p>
+                        <p>Wind (MPH): <span id="current-wind"></span></p>
+                        <p>Humidity (%): <span id="current-humidity"></span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <h3>5-Day</h3>
+                </div>
+                <div class="row">
+                    <div id="day-1" class="forecast col-lg-2 col-md-6 col-12 m-3">
+                        <h4 id="day-1-date"></h4>
+                        <p>Temp (F): <span id="day-1-temp"></span></p>
+                        <p>Wind (MPH): <span id="day-1-wind"></span></p>
+                        <p>Humidity (%): <span id="day-1-humidity"></span></p>
+                    </div>
+                    <div id="day-2" class="forecast col-lg-2 col-md-6 col-12 m-3">
+                        <h4 id="day-2-date"></h4>
+                        <p>Temp (F): <span id="day-2-temp"></span></p>
+                        <p>Wind (MPH): <span id="day-2-wind"></span></p>
+                        <p>Humidity (%): <span id="day-2-humidity"></span></p>
+                    </div>
+                    <div id="day-3" class="forecast col-lg-2 col-md-6 col-12 m-3">
+                        <h4 id="day-3-date"></h4>
+                        <p>Temp (F): <span id="day-3-temp"></span></p>
+                        <p>Wind (MPH): <span id="day-3-wind"></span></p>
+                        <p>Humidity (%): <span id="day-3-humidity"></span></p>
+                    </div>
+                    <div id="day-4" class="forecast col-lg-2 col-md-6 col-12 m-3">
+                        <h4 id="day-4-date"></h4>
+                        <p>Temp (F): <span id="day-4-temp"></span></p>
+                        <p>Wind (MPH): <span id="day-4-wind"></span></p>
+                        <p>Humidity (%): <span id="day-4-humidity"></span></p>
+                    </div>
+                    <div id="day-5" class="forecast col-lg-2 col-md-6 col-12 m-3">
+                        <h4 id="day-5-date"></h4>
+                        <p>Temp (F): <span id="day-5-temp"></span></p>
+                        <p>Wind (MPH): <span id="day-5-wind"></span></p>
+                        <p>Humidity (%): <span id="day-5-humidity"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="js/index.js"></script>
 </body>
-</html>
-  </body>
 </html>

@@ -1,7 +1,15 @@
+# Weather Dashboard
+
+## Description
+
 This is a simple weather dashboard.
 I had to delve into a few APIs to find some basic functionality on the app.
 
-Sources-
+## Installation
+
+
+
+## Sources - And Credit
 https://blog.weatherstack.com/blog/how-to-create-a-great-weather-dashboard-with-a-weather-api-part-4-current-history-forecast/
 
 https://openweathermap.org/appid
